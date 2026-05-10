@@ -37,7 +37,7 @@ export default function Ecosystem() {
       >
         {/* Header */}
         <FadeUp delay={0}>
-          <div style={{ marginBottom: "16px" }}>
+          <div>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
               <div style={{ width: "24px", height: "2px", backgroundColor: "var(--green-800)" }} />
               <span
@@ -60,6 +60,7 @@ export default function Ecosystem() {
                 fontWeight: 700,
                 color: "var(--ink)",
                 margin: 0,
+                marginBottom: "20px",
                 lineHeight: 1.05,
               }}
             >
@@ -72,10 +73,10 @@ export default function Ecosystem() {
           <p
             style={{
               fontFamily: "var(--font-inter)",
-              fontSize: "18px",
-              color: "var(--muted)",
-              lineHeight: 1.7,
-              maxWidth: "600px",
+              fontSize: "17px",
+              color: "#666666",
+              lineHeight: 1.75,
+              maxWidth: "560px",
               margin: 0,
               marginBottom: "56px",
             }}
@@ -113,7 +114,7 @@ function EcosystemCard({ side }: { side: "A" | "B" }) {
   const items = side === "A" ? FOOD_BRANDS : TECH_PRODUCTS;
   const dotColor = isDark ? "var(--gold)" : "var(--green-700)";
   const textColor = isDark ? "var(--white)" : "var(--ink-soft)";
-  const labelColor = isDark ? "var(--gold)" : "var(--muted)";
+  const labelColor = isDark ? "var(--gold)" : "#888888";
   const titleColor = isDark ? "var(--white)" : "var(--ink)";
   const bg = isDark ? "var(--green-900)" : "var(--cream)";
   const borderAccent = isDark ? "rgba(184,150,90,0.4)" : "var(--green-700)";

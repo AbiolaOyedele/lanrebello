@@ -4,7 +4,6 @@
 
 import Footer from "@/components/layout/Footer";
 import Nav from "@/components/layout/Nav";
-import Ecosystem from "@/components/sections/Ecosystem";
 import Governance from "@/components/sections/Governance";
 import Hero from "@/components/sections/Hero";
 import InsightQuote from "@/components/sections/InsightQuote";
@@ -28,7 +27,6 @@ export default function HomePage() {
         <InsightQuote />
         <WhatIBuilt />
         <Traction />
-        <Ecosystem />
         <Governance />
         <InvestorCTA />
       </main>

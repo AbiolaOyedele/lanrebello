@@ -14,7 +14,6 @@ interface NavProps {
 const NAV_LINKS = [
   { label: "The Story", href: "#story" },
   { label: "What I've Built", href: "#built" },
-  { label: "The Ecosystem", href: "#ecosystem" },
   { label: "Governance", href: "#governance" },
   { label: "Contact", href: "#contact" },
 ];
@@ -22,7 +21,6 @@ const NAV_LINKS = [
 const OVERLAY_LINKS = [
   { label: "The Story", href: "#story" },
   { label: "What I've Built", href: "#built" },
-  { label: "The Ecosystem", href: "#ecosystem" },
   { label: "Governance", href: "#governance" },
   { label: "For Investors", href: "#investors" },
   { label: "Contact", href: "#contact" },
@@ -148,24 +146,36 @@ function GridButton({ onClick }: { onClick: () => void }) {
         background: "transparent",
         border: "none",
         cursor: "pointer",
-        padding: "4px",
-        display: "grid",
-        gridTemplateColumns: "repeat(2, 5px)",
-        gridTemplateRows: "repeat(2, 5px)",
-        gap: "4px",
+        /* 44×44 minimum touch target */
+        minWidth: "44px",
+        minHeight: "44px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "0",
+        margin: "-8px -8px -8px 0",
       }}
     >
-      {Array.from({ length: 4 }).map((_, i) => (
-        <div
-          key={i}
-          style={{
-            width: "5px",
-            height: "5px",
-            borderRadius: "1px",
-            background: "rgba(255,255,255,0.8)",
-          }}
-        />
-      ))}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 5px)",
+          gridTemplateRows: "repeat(2, 5px)",
+          gap: "4px",
+        }}
+      >
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div
+            key={i}
+            style={{
+              width: "5px",
+              height: "5px",
+              borderRadius: "1px",
+              background: "rgba(255,255,255,0.8)",
+            }}
+          />
+        ))}
+      </div>
     </button>
   );
 }
@@ -226,24 +236,35 @@ function DropdownMenu({ onClose }: { onClose: () => void }) {
             background: "transparent",
             border: "none",
             cursor: "pointer",
-            padding: "4px",
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 5px)",
-            gridTemplateRows: "repeat(2, 5px)",
-            gap: "4px",
+            minWidth: "44px",
+            minHeight: "44px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0",
+            margin: "-8px -8px -8px 0",
           }}
         >
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div
-              key={i}
-              style={{
-                width: "5px",
-                height: "5px",
-                borderRadius: "1px",
-                background: "rgba(255,255,255,0.8)",
-              }}
-            />
-          ))}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 5px)",
+              gridTemplateRows: "repeat(2, 5px)",
+              gap: "4px",
+            }}
+          >
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div
+                key={i}
+                style={{
+                  width: "5px",
+                  height: "5px",
+                  borderRadius: "1px",
+                  background: "rgba(255,255,255,0.8)",
+                }}
+              />
+            ))}
+          </div>
         </button>
       </div>
 

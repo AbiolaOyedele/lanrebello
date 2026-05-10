@@ -3,39 +3,22 @@
 /** Full-viewport hero with parallax images, text reveals, rotating sublines, and scroll-driven fade */
 
 import {
-  AnimatePresence,
   motion,
   useScroll,
   useTransform,
 } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useResponsive } from "@/lib/hooks";
 
 interface HeroProps {
   loaderDone: boolean;
 }
 
-const ROTATING_LINES = [
-  "From one restaurant in 2016 to a connected group of brands and technology.",
-  "319+ people across the group. Every one of them matters.",
-  "Five food brands. Four tech products. One ecosystem in motion.",
-  "Operating in Lagos and Abuja. Ibadan coming soon.",
-] as const;
-
-const ROTATE_INTERVAL_MS = 3200;
-
-const STATS = [
-  { number: "5", label: "Food brands" },
-  { number: "4", label: "Tech products" },
-  { number: "21", label: "Total outlets" },
-] as const;
-
 const EASE_ENTRANCE = [0.25, 0.1, 0.25, 1] as const;
 
 export default function Hero({ loaderDone }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const [sublineIndex, setSublineIndex] = useState(0);
   const { isMobile } = useResponsive();
 
   const { scrollYProgress } = useScroll({
@@ -48,13 +31,6 @@ export default function Hero({ loaderDone }: HeroProps) {
 // Text scroll fade
   const textY = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSublineIndex((i) => (i + 1) % ROTATING_LINES.length);
-    }, ROTATE_INTERVAL_MS);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section
@@ -121,49 +97,15 @@ export default function Hero({ loaderDone }: HeroProps) {
       <motion.div
         style={{
           position: "absolute",
-          bottom: 0,
+          top: isMobile ? "48%" : "50%",
           left: 0,
           right: 0,
           zIndex: 3,
-          padding: isMobile ? "0 24px 48px" : "0 60px 72px",
+          padding: isMobile ? "0 24px" : "0 60px",
           y: textY,
           opacity: textOpacity,
         }}
       >
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={loaderDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, ease: EASE_ENTRANCE, delay: 0.7 }}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-            marginBottom: "20px",
-          }}
-        >
-          <div
-            style={{
-              width: "28px",
-              height: "1px",
-              backgroundColor: "var(--gold)",
-              flexShrink: 0,
-            }}
-          />
-          <span
-            style={{
-              fontFamily: "var(--font-inter)",
-              fontSize: "11px",
-              fontWeight: 600,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              color: "var(--gold)",
-            }}
-          >
-            Founder · Operator · Builder
-          </span>
-        </motion.div>
-
         {/* Headline */}
         <div style={{ overflow: "hidden", marginBottom: "12px" }}>
           <motion.h1
@@ -202,88 +144,17 @@ export default function Hero({ loaderDone }: HeroProps) {
           </motion.p>
         </div>
 
-        {/* Rotating subline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={loaderDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, ease: EASE_ENTRANCE, delay: 1.05 }}
-          style={{
-            height: "28px",
-            overflow: "hidden",
-            marginBottom: "28px",
-          }}
-        >
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={sublineIndex}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.5, ease: EASE_ENTRANCE }}
-              style={{
-                fontFamily: "var(--font-inter)",
-                fontSize: "14px",
-                color: "rgba(255,255,255,0.6)",
-                margin: 0,
-                lineHeight: 1.5,
-              }}
-            >
-              {ROTATING_LINES[sublineIndex]}
-            </motion.p>
-          </AnimatePresence>
-        </motion.div>
-
         {/* CTA buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={loaderDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, ease: EASE_ENTRANCE, delay: 1.15 }}
-          style={{ display: "flex", gap: "12px", marginBottom: "32px", flexWrap: "wrap" as const }}
+          style={{ display: "flex", gap: "12px", flexWrap: "wrap" as const }}
         >
           <HeroCTAPrimary />
           <HeroCTASecondary />
         </motion.div>
 
-        {/* Stats row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={loaderDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, ease: EASE_ENTRANCE, delay: 1.25 }}
-          style={{
-            borderTop: "1px solid rgba(255,255,255,0.15)",
-            paddingTop: "24px",
-            display: "flex",
-            gap: isMobile ? "28px" : "48px",
-          }}
-        >
-          {STATS.map((stat) => (
-            <div key={stat.label}>
-              <div
-                style={{
-                  fontFamily: '"Inter Display", system-ui, sans-serif',
-                  fontSize: "36px",
-                  fontWeight: 700,
-                  color: "var(--white)",
-                  lineHeight: 1,
-                }}
-              >
-                {stat.number}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "11px",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.5)",
-                  marginTop: "4px",
-                }}
-              >
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
       </motion.div>
     </section>
   );
@@ -299,8 +170,10 @@ function HeroCTAPrimary() {
       animate={{ y: hovered ? -2 : 0, backgroundColor: hovered ? "var(--green-700)" : "var(--green-800)" }}
       transition={{ duration: 0.3 }}
       style={{
-        display: "inline-block",
-        padding: "12px 24px",
+        display: "inline-flex",
+        alignItems: "center",
+        minHeight: "44px",
+        padding: "10px 24px",
         borderRadius: "999px",
         backgroundColor: "var(--green-800)",
         color: "var(--white)",
@@ -328,8 +201,10 @@ function HeroCTASecondary() {
       }}
       transition={{ duration: 0.3 }}
       style={{
-        display: "inline-block",
-        padding: "12px 24px",
+        display: "inline-flex",
+        alignItems: "center",
+        minHeight: "44px",
+        padding: "10px 24px",
         borderRadius: "999px",
         border: "1px solid rgba(255,255,255,0.35)",
         color: "rgba(255,255,255,0.75)",

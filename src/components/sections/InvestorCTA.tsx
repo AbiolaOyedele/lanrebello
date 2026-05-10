@@ -95,7 +95,7 @@ function LeftColumn() {
           style={{
             fontFamily: "var(--font-inter)",
             fontSize: "17px",
-            color: "var(--muted)",
+            color: "#888888",
             lineHeight: 1.7,
             margin: 0,
             maxWidth: "480px",

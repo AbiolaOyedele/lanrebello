@@ -39,9 +39,9 @@ export default function StorySection() {
 
 function LeftColumn() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-      {/* Eyebrow */}
-      <FadeUp delay={0}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      {/* Eyebrow — tight to heading */}
+      <FadeUp delay={0} style={{ marginBottom: "16px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <div
             style={{
@@ -66,8 +66,8 @@ function LeftColumn() {
         </div>
       </FadeUp>
 
-      {/* Heading */}
-      <FadeUp delay={0.1}>
+      {/* Heading — generous space before body */}
+      <FadeUp delay={0.1} style={{ marginBottom: "36px" }}>
         <h2
           style={{
             fontFamily: '"Inter Display", system-ui, sans-serif',
@@ -82,14 +82,14 @@ function LeftColumn() {
         </h2>
       </FadeUp>
 
-      {/* Body paragraphs */}
-      <FadeUp delay={0.2}>
+      {/* Body paragraph 1 — tight to p2 */}
+      <FadeUp delay={0.2} style={{ marginBottom: "16px" }}>
         <p
           style={{
             fontFamily: "var(--font-inter)",
-            fontSize: "18px",
-            color: "var(--muted)",
-            lineHeight: 1.7,
+            fontSize: "17px",
+            color: "#666666",
+            lineHeight: 1.75,
             margin: 0,
           }}
         >
@@ -99,13 +99,14 @@ function LeftColumn() {
         </p>
       </FadeUp>
 
-      <FadeUp delay={0.3}>
+      {/* Body paragraph 2 — generous space before CTA */}
+      <FadeUp delay={0.3} style={{ marginBottom: "44px" }}>
         <p
           style={{
             fontFamily: "var(--font-inter)",
-            fontSize: "18px",
-            color: "var(--muted)",
-            lineHeight: 1.7,
+            fontSize: "17px",
+            color: "#666666",
+            lineHeight: 1.75,
             margin: 0,
           }}
         >

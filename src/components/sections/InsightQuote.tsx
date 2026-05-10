@@ -32,8 +32,8 @@ export default function InsightQuote() {
               fontWeight: 600,
               letterSpacing: "0.2em",
               textTransform: "uppercase" as const,
-              color: "var(--muted)",
-              marginBottom: "48px",
+              color: "#888888",
+              marginBottom: "24px",
             }}
           >
             — Lanre Bello

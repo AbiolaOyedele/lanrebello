@@ -5,17 +5,43 @@ export interface NavLink {
   href: string;
 }
 
+export interface Shareholder {
+  name: string;
+  role: string;
+}
+
 export interface BrandCard {
   name: string;
-  tag: string;
+  subtitle: string;
+  desc: string;
   color: string;
+  href: string;
   image: string;
+  logo: string;
+  logoW: number;
+  logoH: number;
+  ceo: string;
+  shareholders: Shareholder[];
+}
+
+export interface TechTeamMember {
+  name: string;
+  role: string;
 }
 
 export interface TechCard {
   name: string;
+  subtitle: string;
   desc: string;
-  tag: string;
+  color: string;
+  /** Null until logo asset arrives — renders a monogram placeholder */
+  logo: string | null;
+  logoW: number;
+  logoH: number;
+  href: string;
+  ceo?: string;
+  team?: TechTeamMember[];
+  operatedBy?: string;
 }
 
 export interface StatBlock {
